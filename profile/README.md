@@ -1,61 +1,125 @@
-# Data Protection System based on Encryptation and Anonymization Techniques
- Made by the Laboratory of Computer Networks and Security of Universidade Estadual do Ceará (LARCES/UECE).
+# Sistema de Proteção de Dados Baseado em Técnicas de Criptografia e Anonimização
 
-## Proposal summary
-Currently, many companies and government institutions tend to deploy online and cloud services in order to modernize their business models. However, these companies, government institutions and end users are subject to intrusion attempts and data leakage. Several cases of data leakage have occurred around the world. This reality of sensitive data circulating on the Internet led to a concern about the impact of exposing this personal data to unwanted entities, driving the creation of privacy laws, such as the General Data Protection Law (LGPD - 13709/2018) in Brazil and General Data Protection Regulation (GDPR - 2016/679) in Europe, among other laws existing or being created in countries such as Argentina, Colombia and Mexico. These laws have as their main objective to legitimize the guarantee of data protection, which are being provided by users and used by service providers, classifying then, the degree of sensitivity of the information referring to each individual where, the greater the impact of the exposure of given data, the greater its sensitivity. Within this context, this project aims to develop a system for data protection, effectively overcoming these mentioned aspects based on data anonymization techniques. Additionally, this solution will be integrated with a cloud computing environment, enabling higher capacity processing without burdening the computational resources of devices and local servers of companies and government institutions. This project presents an innovative solution with regard to data protection and privacy, as it will allow companies and government institutions to store and/or disclose data without violating the points listed by privacy laws, preventing, even if there are cases of data leakage, data, they suffer the sanctions provided for by law.
+Este projeto apresenta um sistema integrado de proteção de dados que combina técnicas de criptografia e anonimização para garantir privacidade e segurança de informações. Desenvolvido pelo Laboratório de Redes de Computadores e Segurança (LARCES/UECE), o artefato consiste em três componentes principais:
+1. **Syspad API**: API RESTful para processamento de dados
+2. **Front-end**: Interface web para interação com o sistema
+3. **Database Monitor Agent**: Agente de monitoramento de operações em banco de dados
 
-### Description Project
-This project aims to study techniques and methodologies to propose a system for data protection based on cloud computing, to enable a higher capacity processing without encumbering the computational resources of devices and local servers of companies and government institutions. Thus, the objective is to develop a system for receiving data through a communication API, anonymization configuration considered adequate, protecting data through encryption and returning anonymized data to system users. Finally, the prototype was deployed in a cloud environment to carry out a robust experimental analysis.
+Implantado em ambiente de nuvem, o sistema oferece alta capacidade de processamento sem sobrecarregar recursos locais, atendendo aos requisitos de legislações como LGPD e GDPR.
 
-## Technologies used:
-- [Git](git-csm.com) - Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
-- [Node](https://nodejs.org/en) v12.22.1 - Node.js is an open-source, cross-platform JavaScript runtime environment.
-- [Npm](https://www.npmjs.com/) v6.13.4 or [Yarn](https://yarnpkg.com/) v1.21.1
-- [Quasar](https://quasar.dev/) v2.12.0 - Open source programming language based on Vuejs.
-- [Vue](https://vuejs.org/) v3.0.0 -An approachable, performant and versatile framework for building web user interfaces.
-- [Vue-router](https://router.vuejs.org/) v4.0.0 - Expressive, configurable and convenient routing for Vue.js.
-- [Vuex](https://vuex.vuejs.org/) - Vuex is a state management pattern + library for Vue.js applications.
-- [Axios](https://axios-http.com/) v0.27.2 - Axios is a promise-based HTTP Client for node.js and the browser.
-- [Python](https://www.python.org/) - Open source programming language.
-- [Flask](https://flask.palletsprojects.com/en/2.3.x/) - Web framework for building web applications and APIs in Python.
-- [SQLAlchemy](https://www.sqlalchemy.org/) - Object-Relational Mapping (ORM) library that provides a interface to interact with databases using Python.
-- [Swagger](https://swagger.io/) - A toolset that facilitates easy interaction with APIs and the creation of API documentation.
+## Estrutura do Repositório
+```
+├── agent/               # Agente de monitoramento de banco de dados
+├── back-end/            # Implementação da API RESTful
+├── front-end/           # Interface web (Quasar/Vue.js)
+├── docs/                # Documentação técnica e manuais
+└── README.md            # Este arquivo
+```
 
+# Selos Considerados
+Os selos considerados são: **Disponíveis**, **Funcionais**, **Sustentáveis** e **Reprodutíveis**.
+
+# Informações Básicas
+
+## Requisitos de Hardware
+- Mínimo: 1GB RAM, 2 vCPUs (ambiente local)
+- Recomendado: Configuração escalável em cloud (AWS/GCP/Azure equivalentes)
+
+## Ambiente de Software
+- **Sistema Operacional**: Linux/Windows/macOS (testado em Ubuntu 22.04 LTS)
+- **Runtime**: Python 3.9+, Node.js 16.x
+- **Serviços Cloud**: Compatível com principais provedores (AWS, Azure, GCP)
+
+# Dependências
+
+## Principais Tecnologias
+| Componente       | Versão   | Finalidade                          |
+|------------------|----------|-------------------------------------|
+| Python           | 3.10+    | Back-end e agentes                  |
+| Flask            | 2.3.2    | Framework web para APIs             |
+| Quasar           | 2.12.0   | Framework front-end                 |
+| Vue.js           | 3.3.4    | Biblioteca front-end                |
+| SQLAlchemy       | 2.0.23   | ORM para acesso a bancos de dados   |
+| Docker           | 24.0+    | Containerização de serviços         |
+
+
+# Preocupações com Segurança
+- 🔒 Utilize ambiente isolado para testes de produção
+- 🔑 Mantenha as chaves de criptografia em variáveis de ambiente
+- 🛡️ Revogue credenciais de teste após avaliação
+- ⚠️ Nunca utilize credenciais reais em ambientes de teste
+
+# Instalação
+
+## Pré-requisitos Globais
+```bash
+# Instale o gerenciador de pacotes do seu sistema
+sudo apt-get update && sudo apt-get install -y git python3-pip nodejs npm docker.io
+
+# Verifique as versões
+python3 --version  # Deve retornar 3.10+
+node --version     # Deve retornar v16.x+
+docker --version   # Deve retornar 24.0+
+```
+
+## 1. Agente de Monitoramento
+### Opção A: Instalação Manual
+```bash
+git clone https://github.com/FRIDA-LACNIC-UECE/agent.git
+cd agent
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Configurar variáveis (adaptar conforme ambiente)
+export FLASK_APP=application.py
+export API_URL=http://localhost:5000
+export SECRET_KEY='chave-secreta-aleatoria'
+
+flask run --port=3000
+```
+
+### Opção B: Via Docker
+```bash
+docker compose -f docker-compose-agent.yml up --build
+```
+
+## 2. Back-end (API)
+```bash
+git clone https://github.com/FRIDA-LACNIC-UECE/back-end.git
+cd back-end
+
+# Configurar ambiente
+cp .env.example .env  # Editar com suas credenciais
+
+# Iniciar serviço
+docker compose up --build -d
+```
+
+## 3. Front-end
+```bash
+git clone -b main https://github.com/FRIDA-LACNIC-UECE/front-end.git
+cd front-end
+
+npm install
+quasar dev
+```
+
+# Teste mínimo
+
+Para realizar um teste mínimo, execute os seguintes passos:
+1. Submeta um conjunto de dados de teste através da API.
+2. Verifique a resposta com dados anonimizados e criptografados.
+3. Observe o registro de operações pelo Database Monitor Agent.
+
+# Experimentos
+
+Os experimentos estão estruturados para validar as reivindicações do artigo. Cada experimento possui uma subseção detalhando:
+- Arquivos de configuração a serem alterados
+- Comandos a serem executados
+- Flags e parâmetros necessários
+- Tempo esperado de execução e recursos utilizados (ex.: 1GB de RAM/Disk)
+- Resultado esperado para cada cenário
   
-## Participantes
-### Coordenador do projeto:
-Rafael Lopes
-
-### Front-end:
-- Vitória Maia
-
-  Currículo lattes:  https://lattes.cnpq.br/2228081989279340
-- Maria Clara
-
-  Curriculo lattes:  https://lattes.cnpq.br/3456660001349261 
-
-### Back-end:
-- Douglas Araújo
-
-  Currículo lattes: http://lattes.cnpq.br/2296901880718308
-- Danielle dos Santos
-
-  Currículo lattes: https://lattes.cnpq.br/5639924024679664
-- Jonas Nogueira 
-
-  Currículo lattes: https://lattes.cnpq.br/0050427409729489
-- Michael Silva
-
-  Currículo lattes: http://lattes.cnpq.br/8948204401197537
-
-### Engenheiro de cloud:
-- Ariel Portela
-
-  Currículo lattes: http://lattes.cnpq.br/4399349211435607
-
-### Engenheiro de banco de dados:
-- Rafael Menezes
-
-  Currículo lattes: http://lattes.cnpq.br/6951635583842593
-
-
+# Licença
+Este projeto não está sob nenhuma licença específica, portanto, pode ser utilizado livremente, sem restrições. Use-o conforme desejar.
